@@ -420,9 +420,9 @@ public:
    * @param blackboard  blackboard of the root tree
    * @return the newly created tree
    */
-  [[nodiscard]] Tree
-  createTreeFromFile(const std::filesystem::path& file_path,
-                     Blackboard::Ptr blackboard = Blackboard::create());
+  [[nodiscard]] Tree createTreeFromFile(const std::filesystem::path& file_path,
+                                        Blackboard::Ptr blackboard = Blackboard::create(),
+                                        std::string = "");
 
   [[nodiscard]] Tree createTree(const std::string& tree_name,
                                 Blackboard::Ptr blackboard = Blackboard::create());

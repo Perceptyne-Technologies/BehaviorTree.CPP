@@ -411,7 +411,8 @@ Tree BehaviorTreeFactory::createTreeFromText(const std::string& text,
 }
 
 Tree BehaviorTreeFactory::createTreeFromFile(const std::filesystem::path& file_path,
-                                             Blackboard::Ptr blackboard)
+                                             Blackboard::Ptr blackboard,
+                                             std::string main_tree_ID_override)
 {
   if(!_p->parser->registeredBehaviorTrees().empty())
   {
@@ -424,7 +425,15 @@ Tree BehaviorTreeFactory::createTreeFromFile(const std::filesystem::path& file_p
 
   XMLParser parser(*this);
   parser.loadFromFile(file_path);
-  auto tree = parser.instantiateTree(blackboard);
+  Tree tree;
+  if(main_tree_ID_override != "")
+  {
+    tree = parser.instantiateTree(blackboard, main_tree_ID_override);
+  }
+  else
+  {
+    tree = parser.instantiateTree(blackboard);
+  }
   tree.manifests = this->manifests();
   return tree;
 }
